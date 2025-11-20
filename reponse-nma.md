@@ -2,7 +2,11 @@
 
 ## Commande passée
 
-    $ grep -i batman sets.csv | sort -t',' -k3,3n | cut -d',' -f2,3 | uniq | sed 's/\([^,]*\),\(.*\)/| \2 | \1 |/' >> reponse-nma.md
+    $ grep -i batman sets.csv \
+    | cut -d',' -f2,3 \
+    | sort -t',' -k2,2n -k1,1 \
+    | awk -F',' '!seen[$1,$2]++' \
+    | sed 's/\([^,]*\),\(.*\)/| \2 | \1 |/' >> reponse-nma.md 
 
 ## Résultat
 
